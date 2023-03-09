@@ -4,9 +4,15 @@ import {
   StyledLabel,
   StyledFilterInput,
 } from './Filter.styled';
-import PropTypes from 'prop-types';
+import { setFilter } from 'redux/actions';
+import { useDispatch } from 'react-redux';
 
-export const Filter = ({ onFilter }) => {
+export const Filter = () => {
+  const dispatch = useDispatch();
+  const onFilter = event => {
+    const newFilterValue = event.target.value;
+    dispatch(setFilter(newFilterValue));
+  };
   return (
     <StyledFilterArea>
       <StyledLabel htmlFor="filterInput">Find contacts by name</StyledLabel>
@@ -18,8 +24,4 @@ export const Filter = ({ onFilter }) => {
       ></StyledFilterInput>
     </StyledFilterArea>
   );
-};
-
-Filter.propTypes = {
-  onFilter: PropTypes.func,
 };
